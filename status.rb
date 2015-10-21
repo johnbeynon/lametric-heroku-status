@@ -12,12 +12,30 @@ get '/' do
     frames: [
       {
         index: 0,
-        text: "Production: #{production}",
+        text: "Status",
         icon: "i972"
       },
+      {
         index: 1,
-        text: "Development: #{development}",
-        icon: "i972"
+        text: "Production",
+        icon: icon(production)
+      },
+      {
+        index: 2,
+        text: "Development",
+        icon: icon(development)
+      }
     ]
   }.to_json
+end
+
+def icon(status)
+  case status
+  when 'red'
+    return 'i480'
+  when 'green'
+    return 'i479'
+  when 'yellow'
+    return 'i478'
+  end
 end
