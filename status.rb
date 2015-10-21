@@ -35,9 +35,9 @@ end
 def icon(status)
   case status
   when 'red'
-    return 'i1480'
-  when 'green'
     return 'i1479'
+  when 'green'
+    return 'i1480'
   when 'yellow'
     return 'i1478'
   end
