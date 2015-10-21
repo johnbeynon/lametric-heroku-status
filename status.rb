@@ -2,11 +2,14 @@ require 'sinatra'
 require 'json'
 require 'excon'
 
+$stdout.sync = true
+
 get '/' do
   response = Excon.get('https://status.heroku.com/api/v3/current-status')
   json = JSON.parse(response.body)
   production = json['status']['Production']
   development = json['status']['Development']
+  puts "production=#{production} development=#{development}"
   content_type :json
   {
     frames: [
