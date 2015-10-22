@@ -20,12 +20,12 @@ get '/' do
       },
       {
         index: 1,
-        text: "Production",
+        text: "Prod",
         icon: icon(production)
       },
       {
         index: 2,
-        text: "Development",
+        text: "Dev",
         icon: icon(development)
       }
     ]
