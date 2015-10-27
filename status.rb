@@ -5,11 +5,8 @@ require 'excon'
 $stdout.sync = true
 
 get '/' do
-  response = Excon.get('https://status.heroku.com/api/v3/current-status')
-  json = JSON.parse(response.body)
-  production = json['status']['Production']
-  development = json['status']['Development']
-  puts "time=#{Time.now.getutc} production=#{production} icon=#{icon(production)} development=#{development} icon=#{icon(development)}"
+  production, development = getStatus
+
   content_type :json
   {
     frames: [
@@ -30,6 +27,15 @@ get '/' do
       }
     ]
   }.to_json
+end
+
+def getStatus
+  response = Excon.get('https://status.heroku.com/api/v3/current-status')
+  json = JSON.parse(response.body)
+  production = json['status']['Production']
+  development = json['status']['Development']
+  puts "time=#{Time.now.getutc} production=#{production} icon=#{icon(production)} development=#{development} icon=#{icon(development)}"
+  return production, development
 end
 
 def icon(status)
