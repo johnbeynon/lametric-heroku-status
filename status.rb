@@ -5,11 +5,12 @@ require 'redis'
 
 $stdout.sync = true
 
-REDIS_EXPIRY = ENV["CACHE_STATUS_FOR"] || 60 # in seconds
+CACHE_STATUS_FOR = ENV["CACHE_STATUS_FOR"] || 60 # in seconds
 
 configure do
   uri = URI.parse(ENV["REDIS_URL"] || 'redis://localhost:6379')
   $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
 end
 
 get '/' do
